@@ -68,9 +68,9 @@ function updateGrid () {
         for (let column = 0; column <= 15; column++) {
             currentCellAliveorDead = grid[row][column]
             currentCelNeighbors = countNeighbors(row, column)
-            if (currentCellAliveorDead == 1 && currentCelNeighbors == 2) {
+            if (currentCellAliveorDead == 1 && currentCelNeighbors < 2) {
                 nextGrid[row].push(0)
-            } else if (currentCellAliveorDead == 1 && currentCelNeighbors == 3) {
+            } else if (currentCellAliveorDead == 1 && currentCelNeighbors > 3) {
                 nextGrid[row].push(0)
             } else if (currentCellAliveorDead == 0 && currentCelNeighbors == 3) {
                 nextGrid[row].push(1)
@@ -230,8 +230,8 @@ function countNeighborWrapLeft (currentRow: number, currentCol: number) {
     neighborCount += grid[currentRow - 0][currentCol + 1]
     neighborCount += grid[currentRow + 1][currentCol + 1]
     neighborCount += grid[currentRow + 1][currentCol + 0]
-    currentCelNeighbors += copyRight(currentRow + 1)
-    currentCelNeighbors += copyRight(currentRow + 0)
+    neighborCount += copyRight(currentRow + 1)
+    neighborCount += copyRight(currentRow + 0)
     return neighborCount
 }
 function countNeighborsWrapBottom (currentRow: number, currentCol: number) {
